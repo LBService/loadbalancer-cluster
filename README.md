@@ -16,5 +16,14 @@ This project aimed to offer layer 4 tcp & udp and layer 7 http & https loadbalan
 
 ## Architect
 
+## Build
+Requirement: go version > 1.10
+```
+make
+```
+Run locally:
+```
+make local-run
+```
 
 ## Getting start
