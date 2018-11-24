@@ -34,6 +34,5 @@ func Get() Info {
 }
 
 func (info Info) String() string {
-	return info.GitVersion
+	return fmt.Sprintf("%s-%s: %s", info.GitVersion, gitCommit, buildDate)
 }
-

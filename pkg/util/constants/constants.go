@@ -11,9 +11,8 @@ const (
 
 	DefaultBackupPodHTTPPort = 19999
 
-	OperatorRoot   = "/var/tmp/lbaas-operator"
+	OperatorRoot = "/var/tmp/lbaas-operator"
 
 	EnvOperatorPodName      = "MY_POD_NAME"
 	EnvOperatorPodNamespace = "MY_POD_NAMESPACE"
 )
-

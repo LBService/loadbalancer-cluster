@@ -9,6 +9,9 @@ import (
 
 	controller "github.com/LBService/loadbalancer-cluster/pkg/controller"
 
+	"github.com/LBService/loadbalancer-cluster/pkg/k8sutil"
+	"github.com/LBService/loadbalancer-cluster/pkg/util/constants"
+	"github.com/LBService/loadbalancer-cluster/pkg/version"
 	"github.com/sirupsen/logrus"
 	"k8s.io/api/core/v1"
 	"k8s.io/client-go/kubernetes"
@@ -17,9 +20,6 @@ import (
 	"k8s.io/client-go/tools/leaderelection"
 	"k8s.io/client-go/tools/leaderelection/resourcelock"
 	"k8s.io/client-go/tools/record"
-	"github.com/LBService/loadbalancer-cluster/pkg/util/constants"
-	"github.com/LBService/loadbalancer-cluster/pkg/version"
-	"github.com/LBService/loadbalancer-cluster/pkg/k8sutil"
 )
 
 var (
@@ -48,7 +48,6 @@ func main() {
 	logrus.Infof("Go Version: %s", runtime.Version())
 	logrus.Infof("Go OS/Arch: %s/%s", runtime.GOOS, runtime.GOARCH)
 	logrus.Infof("lbaas-operator Version: %v", version.Get())
-
 
 	kubecli := k8sutil.MustNewKubeClient()
 	rl, err := resourcelock.New(
@@ -96,15 +95,12 @@ func run(ctx context.Context) {
 	}
 }
 
-
-
 func newControllerConfig() controller.Config {
 	kubecli := k8sutil.MustNewKubeClient()
 
-
 	cfg := controller.Config{
-		KubeCli:        kubecli,
-		CreateCRD:      createCRD,
+		KubeCli:   kubecli,
+		CreateCRD: createCRD,
 	}
 
 	return cfg

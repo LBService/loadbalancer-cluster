@@ -3,13 +3,13 @@ package controller
 import (
 	"time"
 
+	"context"
+	"github.com/LBService/loadbalancer-cluster/pkg/apis/lbpool/v1alpha1"
+	"github.com/LBService/loadbalancer-cluster/pkg/loadbalancer"
 	"github.com/sirupsen/logrus"
 	apiextensionsclient "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
 	kwatch "k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/kubernetes"
-	"github.com/LBService/loadbalancer-cluster/pkg/loadbalancer"
-	"github.com/LBService/loadbalancer-cluster/pkg/apis/lbpool/v1alpha1"
-	"context"
 )
 
 var initRetryWaitTime = 30 * time.Second
@@ -39,11 +39,10 @@ func New(cfg Config) *Controller {
 	return &Controller{
 		logger: logrus.WithField("pkg", "controller"),
 
-		Config:   cfg,
-		lbs: make(map[string]*loadbalancer.LoadBalancer),
+		Config: cfg,
+		lbs:    make(map[string]*loadbalancer.LoadBalancer),
 	}
 }
-
 
 func (c *Controller) Start(ctx context.Context) error {
 	// TODO: get rid of this init code. CRD and storage class will be managed outside of operator.

@@ -1,8 +1,8 @@
 package k8sutil
 
 import (
-	"os"
 	"net"
+	"os"
 
 	"k8s.io/client-go/kubernetes"
 	_ "k8s.io/client-go/plugin/pkg/client/auth/gcp" // for gcp auth
@@ -15,6 +15,7 @@ const (
 	//AnnotationClusterWide annotation value for cluster wide loadbalancers.
 	AnnotationClusterWide = "clusterwide"
 )
+
 func MustNewKubeClient() kubernetes.Interface {
 	cfg, err := InClusterConfig()
 	if err != nil {
@@ -42,4 +43,3 @@ func InClusterConfig() (*rest.Config, error) {
 	}
 	return cfg, nil
 }
-
