@@ -3,6 +3,9 @@
 *.dll
 *.so
 *.dylib
+.idea
+main
+lbaas
 
 # Test binary, build with `go test -c`
 *.test
